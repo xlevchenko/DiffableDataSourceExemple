@@ -1,5 +1,5 @@
 //
-//  ShoppingList.swift
+//  ShoppingListController.swift
 //  Shopping List
 //
 //  Created by Olexsii Levchenko on 5/20/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShoppingList: UIViewController {
+class ShoppingListController: UIViewController {
     
     private var tableView: UITableView!
     private var dataSource: DataSource! //it the subclass we created
@@ -17,12 +17,13 @@ class ShoppingList: UIViewController {
         configureNavigationBar()
         configureTableView()
         configureDataSource()
+        
     }
 }
 
 
 //MARK: Configure NavigationBar
-extension ShoppingList {
+extension ShoppingListController {
     private func configureNavigationBar() {
         navigationItem.title = "Shopping List"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditState))
@@ -32,7 +33,7 @@ extension ShoppingList {
 
 
 //MARK: Configure Table View
-extension ShoppingList {
+extension ShoppingListController {
     private func configureTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -45,7 +46,7 @@ extension ShoppingList {
 
 
 //MARK: Configure DataSource
-extension ShoppingList {
+extension ShoppingListController {
     private func configureDataSource() {
         dataSource = DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -76,16 +77,27 @@ extension ShoppingList {
     
     
     @objc private func toggleEditState() {
-        
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        navigationItem.leftBarButtonItem?.title = tableView.isEditing ? "Done" : "Edit"
     }
     
+    
     @objc private func presentAddVC() {
-        //1. Create a AddItemViewController.swift file
-        //2. add a ViewController object in a Storyboard
-        //3. add to textfield, one for item name and other  for price
-        //4. add a picker view to manage the categories
-        //5. user is able to add new item to a given category and a click on a submmit button
-        //6. use any communiction protocol to get data from AddItemViewController back to the ViewController
-        // types: (delegation, KVO, notification center, unwin segue, callback, combine)
+        guard let addItemVC = storyboard?.instantiateViewController(withIdentifier: "AddItemController") as? AddItemController else {
+            return
+        }
+        addItemVC.delegate = self
+        present(addItemVC, animated: true)
     }
+}
+
+
+extension ShoppingListController: AddItemControllerDelegate {
+    func didAddNewItem(_ addItemViewConroller: AddItemController, item: Item) {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems([item], toSection: item.category)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    
 }

@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Shopping List-->
+        <!--Shopping List Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ShoppingList" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ShoppingListController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,10 +19,72 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="k0K-Fl-xfu"/>
+                    <connections>
+                        <segue destination="RDe-YH-47q" kind="show" id="NUi-vC-XnI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="93.75"/>
+        </scene>
+        <!--Add Item Controller-->
+        <scene sceneID="kZi-2s-gD1">
+            <objects>
+                <viewController storyboardIdentifier="AddItemController" id="RDe-YH-47q" customClass="AddItemController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RLn-XQ-V8q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="28E-He-qmj">
+                                <rect key="frame" x="20" y="314" width="270" height="34"/>
+                                <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zez-Ut-yVA">
+                                <rect key="frame" x="333" y="314" width="61" height="34"/>
+                                <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEx-t4-2RQ">
+                                <rect key="frame" x="0.0" y="379" width="414" height="216"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbd-k7-l46">
+                                <rect key="frame" x="130" y="615" width="154" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Add Item"/>
+                                <connections>
+                                    <action selector="AddItem" destination="RDe-YH-47q" eventType="touchUpInside" id="9LP-0W-0eY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uxW-O2-cn2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gbd-k7-l46" firstAttribute="top" secondItem="OEx-t4-2RQ" secondAttribute="bottom" constant="20" id="48r-zs-yEu"/>
+                            <constraint firstItem="gbd-k7-l46" firstAttribute="leading" secondItem="uxW-O2-cn2" secondAttribute="leading" constant="130" id="AAk-uv-huu"/>
+                            <constraint firstItem="28E-He-qmj" firstAttribute="leading" secondItem="uxW-O2-cn2" secondAttribute="leading" constant="20" id="Hxr-hT-u87"/>
+                            <constraint firstItem="zez-Ut-yVA" firstAttribute="top" secondItem="uxW-O2-cn2" secondAttribute="top" constant="226" id="LFT-D3-rdH"/>
+                            <constraint firstItem="uxW-O2-cn2" firstAttribute="trailing" secondItem="zez-Ut-yVA" secondAttribute="trailing" constant="20" id="Ldj-Sc-kC3"/>
+                            <constraint firstItem="OEx-t4-2RQ" firstAttribute="top" secondItem="28E-He-qmj" secondAttribute="bottom" constant="31" id="TqW-kd-7Di"/>
+                            <constraint firstItem="OEx-t4-2RQ" firstAttribute="leading" secondItem="uxW-O2-cn2" secondAttribute="leading" id="YKm-VC-2lG"/>
+                            <constraint firstItem="OEx-t4-2RQ" firstAttribute="trailing" secondItem="uxW-O2-cn2" secondAttribute="trailing" id="e7u-Yy-pBs"/>
+                            <constraint firstItem="28E-He-qmj" firstAttribute="top" secondItem="uxW-O2-cn2" secondAttribute="top" constant="226" id="iJX-H6-HqO"/>
+                            <constraint firstItem="zez-Ut-yVA" firstAttribute="leading" secondItem="28E-He-qmj" secondAttribute="trailing" constant="43" id="xBy-Jk-sOR"/>
+                            <constraint firstItem="uxW-O2-cn2" firstAttribute="trailing" secondItem="gbd-k7-l46" secondAttribute="trailing" constant="130" id="xPj-gP-WyV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="t1D-Mt-O8X"/>
+                    <connections>
+                        <outlet property="name" destination="28E-He-qmj" id="Wgi-dW-7PZ"/>
+                        <outlet property="pickerView" destination="OEx-t4-2RQ" id="36h-pJ-REm"/>
+                        <outlet property="price" destination="zez-Ut-yVA" id="14y-Z3-iip"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uNv-L6-L5e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1624.6376811594205" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FLb-wO-8qB">
@@ -44,6 +106,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
